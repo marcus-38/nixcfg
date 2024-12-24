@@ -1,0 +1,2 @@
+# nixcfg
+My personal NixOS
