@@ -3,9 +3,16 @@
 default:
     @just --list
 
-# Deploy system configuration
-deploy SYSTEM:
-    nixos-rebuild switch --flake .#{{SYSTEM}} --target-host {{SYSTEM}} --use-remote-sudo
+# Deploy remote machine
+deploy MACHINE IP='':
+    #!/usr/bin/env sh
+    if [ {{MACHINE}} = "macos" ]; then
+       darwin-rebuild switch --flake .
+    elif [ -z "{{IP}}" ]; then
+       sudo nixos-rebuild switch --fast --flake ".#{{MACHINE}}"
+    else
+       nixos-rebuild switch --fast --flake ".#{{MACHINE}}" --use-remote-sudo --target-host "fet@{{IP}}" --build-host "fet@{{IP}}"
+    fi
 
 # Update flake
 update:
