@@ -1,15 +1,37 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
+{ config, outputs, ... }:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [ 
+      inputs.impermanence.nixosModules.impermanence
+      inputs.home-manager.nixosModules.home-manager
+
       ./hardware-configuration.nix
+
+      ./../../modules/nixos/base.nix
+      ./../../modules/nixos/desktop.nix
+      
     ];
 
+  home-manager = {
+  	extraSpecialArgs = {inherit inputs outputs;};
+	useGlobalPkgs = true;
+	useUserPackages = true;
+	users = {
+		fet = {
+			imports = [
+				./../../modules/home-manager/base.nix
+				./../../modules/home-manager/fonts.nix
+				./../../modules/home-manager/alacritty.nix
+				./../../modules/home-manager/desktop.nix
+			];
+		};
+	};
+  };
+
+  networking.hostName = "ghost";
+}
+/*
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -159,3 +181,5 @@
   system.stateVersion = "24.05"; # Did you read the comment?
 
 }
+
+*/
