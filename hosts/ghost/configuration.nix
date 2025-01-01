@@ -84,14 +84,14 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.fet = {
-    isNormalUser = true;
-    description = "fet";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    #  thunderbird
-    ];
-  };
+  # users.users.fet = {
+  #   isNormalUser = true;
+  #   description = "fet";
+  #   extraGroups = [ "networkmanager" "wheel" ];
+  #   packages = with pkgs; [
+  #   #  thunderbird
+  #   ];
+  # };
 
   # Install firefox.
   programs.firefox.enable = true;

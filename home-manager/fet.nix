@@ -8,6 +8,12 @@
     "Xft.dpi" = 172;
   };
 
+  users.users.fet = {
+    isNormalUser = true;
+    description = "fet";
+    extraGroups = [ "networkManager" "wheel" ];
+  };
+  
   home.packages = with pkgs; [
     fastfetch
     nnn
