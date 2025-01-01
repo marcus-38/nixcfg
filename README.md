@@ -14,6 +14,10 @@ cd nixcfg
 ```bash
 sudo nixos-rebuild switch --flake .#ghost
 ```
+or use the justfile
+```bash
+just ghost
+```
 
 # Use this config as a source
 ```bash
