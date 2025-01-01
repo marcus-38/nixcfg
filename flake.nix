@@ -18,7 +18,7 @@
 	      specialArgs = { inherit inputs; };
 	      modules = [
 	        ./hosts/ghost/configuration.nix
-          ./clean.nix
+          ./features/clean.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
