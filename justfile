@@ -33,6 +33,9 @@ check:
 rebuild HOST:
 	@sudo nixos-rebuild switch --upgrade --flake .#{{HOST}}
 
+ghost:
+	@sudo nixos-rebuild switch --upgrade --flake .#ghost
+
 up-all HOST:
 	@nix flake update
 	@nix flake update home-manager
