@@ -1,0 +1,12 @@
+*~
+,*
+.*.swp
+.*.swo
+outputs/
+result-*
+result
+repl-result-*
+.direnv
+.envrc
+
+.DS_Store
