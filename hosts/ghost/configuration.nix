@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+ #     ./hardware-configuration.nix
     ];
 
   # Bootloader.
@@ -15,7 +15,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-76d1f7b8-945f-4215-a46d-218a77ef5c3f".device = "/dev/disk/by-uuid/76d1f7b8-945f-4215-a46d-218a77ef5c3f";
-  networking.hostName = "ghost"; # Define your hostname.
+#  networking.hostName = "ghost"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -137,6 +137,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  #system.stateVersion = "24.05"; # Did you read the comment?
 
 }
