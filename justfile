@@ -33,6 +33,12 @@ check:
 rebuild HOST:
 	@sudo nixos-rebuild switch --upgrade --flake .#{{HOST}}
 
+up-all HOST:
+	@nix flake update
+	@nix flake update home-manager
+	@sudo nixos-rebuild switch --recreate-lock-file --flake .#{{HOST}}
+
+
 ### Git
 commit MESSAGE:
 	git add .
