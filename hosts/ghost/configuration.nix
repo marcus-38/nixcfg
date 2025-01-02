@@ -35,14 +35,14 @@
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "${locale}"; #" sv_SE.UTF-8";
-    LC_IDENTIFICATION = "sv_SE.UTF-8";
-    LC_MEASUREMENT = "sv_SE.UTF-8";
-    LC_MONETARY = "sv_SE.UTF-8";
-    LC_NAME = "sv_SE.UTF-8";
-    LC_NUMERIC = "sv_SE.UTF-8";
-    LC_PAPER = "sv_SE.UTF-8";
-    LC_TELEPHONE = "sv_SE.UTF-8";
-    LC_TIME = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "${locale}"; #""sv_SE.UTF-8";
+    LC_MEASUREMENT = "${locale}"; #""sv_SE.UTF-8";
+    LC_MONETARY = "${locale}"; #""sv_SE.UTF-8";
+    LC_NAME = "${locale}"; #""sv_SE.UTF-8";
+    LC_NUMERIC = "${locale}"; #""sv_SE.UTF-8";
+    LC_PAPER = "${locale}"; #""sv_SE.UTF-8";
+    LC_TELEPHONE = "${locale}"; #""sv_SE.UTF-8";
+    LC_TIME = "${locale}"; #""sv_SE.UTF-8";
   };
 
   # Enable the X11 windowing system.
