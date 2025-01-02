@@ -1,9 +1,7 @@
 {
   description = "NixOS Configuration";
 
-  inputs = let
-    username = "fet";
-  in {
+  inputs =  {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -13,7 +11,11 @@
     helix.url = "github:helix-editor/helix/master";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, username, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  let
+    user = "fet";
+    system = "x86_64-linux";
+  in {
     nixosConfigurations = {
       ghost = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -24,7 +26,7 @@
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.${username} = import ./home-manager/${username}.nix;
+            home-manager.users.${user} = import ./home-manager/${user}.nix;
           }
 	      ];
       };
