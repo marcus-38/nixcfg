@@ -18,8 +18,8 @@
   in {
     nixosConfigurations = {
       ghost = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-	      specialArgs = { inherit inputs; };
+        system = ${system};
+	      specialArgs = { inherit inputs user; };
 	      modules = [
 	        ./hosts/ghost
           ./features/clean.nix
