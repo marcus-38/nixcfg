@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, user, ... }:
+{ config, pkgs, inputs, user, locale, ... }:
 
 {
   imports =
@@ -34,7 +34,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_ADDRESS = "${locale}"; #" sv_SE.UTF-8";
     LC_IDENTIFICATION = "sv_SE.UTF-8";
     LC_MEASUREMENT = "sv_SE.UTF-8";
     LC_MONETARY = "sv_SE.UTF-8";

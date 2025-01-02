@@ -15,11 +15,12 @@
   let
     user = "fet";
     system = "x86_64-linux";
+    locale = "sv_SE.UTF-8";
   in {
     nixosConfigurations = {
       ghost = nixpkgs.lib.nixosSystem {
         system = "${system}";
-	      specialArgs = { inherit inputs user; };
+	      specialArgs = { inherit inputs user system locale; };
 	      modules = [
 	        ./hosts/ghost
           ./features/clean.nix
