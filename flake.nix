@@ -18,7 +18,7 @@
   in {
     nixosConfigurations = {
       ghost = nixpkgs.lib.nixosSystem {
-        system = ${system};
+        system = "${system}";
 	      specialArgs = { inherit inputs user; };
 	      modules = [
 	        ./hosts/ghost
