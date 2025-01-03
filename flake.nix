@@ -9,9 +9,11 @@
     };
 
     helix.url = "github:helix-editor/helix/master";
+
+    nix-doom-emacs.url = "github:nix-community/nix-doom-emacs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, nix-doom-emacs, ... }:
   let
     user = "fet";
     system = "x86_64-linux";
