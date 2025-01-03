@@ -1,4 +1,4 @@
-{ config, pkgs, nix-doom-emacs, ... }:
+{ config, pkgs, ... }:
 {
   home.username = "fet";
   home.homeDirectory = "/home/fet";
@@ -70,12 +70,7 @@
     gh
   ];
 
-  programs.doom-emacs = {
-    enable = true;
-    doomPrivateDir = ./doom.d; # dir containing your config.el, init.el and packages.el
-  };
-
-  programs.git = {
+ programs.git = {
     enable = true;
     userName = "marcus-38";
     userEmail = "marcus@r38.se";
@@ -112,14 +107,7 @@
     #  ls=eza;
     #};
   };
-
-  services.emacs = {
-    enable = true;
-    package = inputs.doom-emacs.packages.${system}.doom-emacs.override {
-      doomPrivateDir = ./doom.d;
-    };
-  };
-  
+ 
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
   
