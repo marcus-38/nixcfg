@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, nixvim, ... }:
 {
   home.username = "fet";
   home.homeDirectory = "/home/fet";
