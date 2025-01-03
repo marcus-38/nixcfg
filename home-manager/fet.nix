@@ -1,4 +1,4 @@
-{ config, pkgs, nixvim, ... }:
+{ config, pkgs, ... }:
 {
   home.username = "fet";
   home.homeDirectory = "/home/fet";
@@ -69,12 +69,6 @@
 
     gh
   ];
-
-  programs.nixvim = {
-    enable = true;
-    colorschemes.catppuccin.enable = true;
-    plugins.lualine.enable = true;
-  };
 
  programs.git = {
     enable = true;

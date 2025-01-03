@@ -9,14 +9,9 @@
     };
 
     helix.url = "github:helix-editor/helix/master";
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
  };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
   let
     user = "fet";
     system = "x86_64-linux";
