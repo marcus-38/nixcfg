@@ -42,7 +42,7 @@ ghost:
 	git add .
 	@nix flake update
 	@nix flake update home-manager
-	git commit -m  "Auto generated commit"
+	git commit -m "Auto generated commit"
 	git push
 	@sudo nixos-rebuild switch --recreate-lock-file --flake .#ghost
 
