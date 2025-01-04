@@ -23,6 +23,7 @@
 	      specialArgs = { inherit inputs user system locale; };
 	      modules = [
 	        ./hosts/ghost
+          ./home-manager/features
           ./features/clean.nix
           home-manager.nixosModules.home-manager {
             home-manager.useGlobalPkgs = true;

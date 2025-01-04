@@ -8,8 +8,6 @@
     "Xft.dpi" = 172;
   };
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
   # users.users.fet = {
   #   isNormalUser = true;
   #   description = "fet";
