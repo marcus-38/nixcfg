@@ -2,7 +2,7 @@
 { lib, config, pkgs, outputs, ... }: let
   getHostName = x: lib.last (lib.splitString "@" x);
   remoteColorschemes = lib.mapAttrs' (n: v: {
-    name = getHostname n;
+    name = "ghost";
     value = v.config.colorscheme.rawColorscheme.colors.${config.colorscheme.mode};
   })
   outputs.homeConfigurations;
