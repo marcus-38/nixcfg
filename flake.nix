@@ -1,37 +1,37 @@
 {
-  description = "NixOS Configuration";
+  description = "A very basic flake";
 
-  inputs =  {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
+    nvf.url = "github:notashelf/nvf";
+  };
 
-    helix.url = "github:helix-editor/helix/master";
- };
+  outputs = { self, nixpkgs, nvf, ... }: let 
+    mysystem = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${mysystem};
 
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }:
-  let
-    user = "fet";
-    system = "x86_64-linux";
-    locale = "sv_SE.UTF-8";
-  in {
-    nixosConfigurations = {
-      ghost = nixpkgs.lib.nixosSystem {
-        system = "${system}";
-	      specialArgs = { inherit inputs user system locale; };
-	      modules = [
-	        ./hosts/ghost
-          ./home-manager/features
-          ./features/clean.nix
-          home-manager.nixosModules.home-manager {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.${user} = import ./home-manager/${user}.nix;
-          }
-	      ];
+    configModule = {
+      config.vim = {
+        theme.enable = true;
       };
     };
-  };
+
+#    customNeovim = nvf.lib.neovimConfiguration {
+#      inherit pkgs;
+#      modules = [configModule];
+#    };
+
+    in {
+ #     packages.${mysystem}.my-neovim = customNeovim.neovim; # makes the package available as a flake outupt under packages
+
+      nixosConfigurations.ghost = nixpkgs.lib.nixosSystem {
+        system = "${mysystem}";
+        modules = [
+          ./configuration.nix
+          nvf.nixosModules.default
+ #         { environment.systemPackages = [ customNeovim.neovim ]; }
+        ];
+      };
+    };
 }

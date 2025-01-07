@@ -2,20 +2,20 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, user, locale, ... }:
+{ config, pkgs, ... }:
 
 {
   imports =
     [ # Include the results of the hardware scan.
- #     ./hardware-configuration.nix
+      ./hardware-configuration.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.initrd.luks.devices."luks-76d1f7b8-945f-4215-a46d-218a77ef5c3f".device = "/dev/disk/by-uuid/76d1f7b8-945f-4215-a46d-218a77ef5c3f";
-#  networking.hostName = "ghost"; # Define your hostname.
+  boot.initrd.luks.devices."luks-bdd4592c-ce4e-4804-8d0a-a654c838d32d".device = "/dev/disk/by-uuid/bdd4592c-ce4e-4804-8d0a-a654c838d32d";
+  networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -25,8 +25,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   # Set your time zone.
   time.timeZone = "Europe/Stockholm";
 
@@ -34,23 +32,23 @@
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
-    LC_ADDRESS = "${locale}"; #" sv_SE.UTF-8";
-    LC_IDENTIFICATION = "${locale}"; #""sv_SE.UTF-8";
-    LC_MEASUREMENT = "${locale}"; #""sv_SE.UTF-8";
-    LC_MONETARY = "${locale}"; #""sv_SE.UTF-8";
-    LC_NAME = "${locale}"; #""sv_SE.UTF-8";
-    LC_NUMERIC = "${locale}"; #""sv_SE.UTF-8";
-    LC_PAPER = "${locale}"; #""sv_SE.UTF-8";
-    LC_TELEPHONE = "${locale}"; #""sv_SE.UTF-8";
-    LC_TIME = "${locale}"; #""sv_SE.UTF-8";
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
   };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
   # Enable the GNOME Desktop Environment.
- # services.xserver.displayManager.gdm.enable = true;
- # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -84,7 +82,7 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.${user} = {
+  users.users.fet = {
     isNormalUser = true;
     description = "fet";
     extraGroups = [ "networkmanager" "wheel" ];
@@ -93,8 +91,22 @@
     ];
   };
 
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Install firefox.
   programs.firefox.enable = true;
+
+  # nvf neovim
+  programs.nvf = {
+    enable = true;
+    settings = {
+      vim.viAlias = false;
+      vim.vimAlias = true;
+      vim.lsp = {
+        enable = true;
+      };
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -102,14 +114,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
+  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     gh
-    just
-    fastfetch
-
-    inputs.helix.packages."${pkgs.system}".helix
+    wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -137,6 +145,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  #system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 
 }
