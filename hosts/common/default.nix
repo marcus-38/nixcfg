@@ -1,6 +1,26 @@
 # Common configuration for all hosts
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
+  imports = [
+    ./extraServices
+    ./users
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
-{ lib, inputs, outputs, ... }: {
+  environment.pathsToLink = [
+    "/share/xdg-desktop-portal"
+    "/share/applications"
+  ];
+
+  home-manager = {
+    useUserPackages = true;
+    extraSpecialArgs = {inherit inputs outputs;};
+  };
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -8,6 +28,9 @@
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.stable-packages
+      outputs.overlays.locked-packages
+      outputs.overlays.pinned-packages
+      outputs.overlays.master-packages
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -29,18 +52,24 @@
   nix = {
     settings = {
       experimental-features = "nix-command flakes";
+      cores = 2;
+      max-jobs = 8;
       trusted-users = [
         "root"
-        "fet"
+        "m3tam3re"
       ]; # Set users that are allowed to use the flake command
     };
     gc = {
       automatic = true;
+      dates = "weekly";
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; }))
+    registry =
+      (lib.mapAttrs (_: flake: {inherit flake;}))
       ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = [ "/etc/nix/path" ];
+    nixPath = ["/etc/nix/path"];
   };
+  users.defaultUserShell = pkgs.nushell;
 }
+
