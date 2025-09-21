@@ -11,4 +11,4 @@ $ nixos-rebuild switch --flake .#nixos-vm --target-host nixos-vm --use-remote
 This is my small Dell XPS 13" 9310 laptop.
 
 ## ghost
-This is my mail machine.
+This is my main machine.
